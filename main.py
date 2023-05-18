@@ -1,9 +1,11 @@
 from compile import pdflatex
 import tkinter
+from pathlib import Path
 
 
 def compilateur():
-    pdflatex(E.get())
+    """Fonction d'activation de la compilation"""
+    pdflatex(Path(E.get()))
 
 
 window = tkinter.Tk()

@@ -1,7 +1,13 @@
 import os
+from pathlib import Path
 
 
-def pdflatex(file: str):
+def pdflatex(file: Path):
+    """
+
+    :param file: le chemin vers le fichier
+    :return bool: le booléen correspondant à la réussite de la compilation du fichier
+    """
     try:
         f = open(file)
         f.close()
