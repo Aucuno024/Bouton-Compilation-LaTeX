@@ -1,8 +1,7 @@
 import os
-from pathlib import Path
 
 
-def pdflatex(file: Path):
+def pdflatex(file: str):
     """
 
     :param file: le chemin vers le fichier
