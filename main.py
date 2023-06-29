@@ -11,7 +11,7 @@ def compilateur():
 window = tkinter.Tk()
 E = tkinter.Entry(window)
 f = ""
-B = tkinter.Button(window, text="Hello", command=compilateur, default="disabled")
+B = tkinter.Button(window, text="Compile", command=compilateur, default="disabled")
 E.pack()
 B.pack()
 window.mainloop()

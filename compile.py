@@ -8,10 +8,8 @@ def pdflatex(file: str):
     :return bool: le booléen correspondant à la réussite de la compilation du fichier
     """
     try:
-        f = open(file)
-        f.close()
         os.system("pdflatex -aux-directory=auxfile " + file)
-        os.system("del auxfile")
+        os.system("echo O | del auxfile")
         return True
     except BaseException:
         print("f")
