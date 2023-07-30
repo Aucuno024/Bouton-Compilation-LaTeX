@@ -1,4 +1,8 @@
 venv
 .idea
-_pycache_
+__pycache__
 auxfile
+article.tex
+test.tex
+article.pdf
+test.pdf

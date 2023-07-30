@@ -1,17 +1,17 @@
 from compile import pdflatex
 import tkinter
-from pathlib import Path
+
 
 
 def compilateur():
     """Fonction d'activation de la compilation"""
-    pdflatex(Path(E.get()))
+    pdflatex(E.get())
 
 
 window = tkinter.Tk()
 E = tkinter.Entry(window)
 f = ""
-B = tkinter.Button(window, text="Hello", command=compilateur, default="disabled")
+B = tkinter.Button(window, text="Compile", command=compilateur, default="disabled")
 E.pack()
 B.pack()
 window.mainloop()
