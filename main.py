@@ -2,14 +2,13 @@ from compile import pdflatex
 import tkinter
 import threading
 from os import stat
-from stat import ST_MTIME
-from time import localtime, asctime, sleep
+from time import localtime, asctime
 
 
-def compilateur():
-    """Fonction d'activation de la compilation"""
-    if len(E.get()) > 0:
-        if len(L.curselection()) == 0:
+def compiler():
+    """Calls up the compilation function for the parameters selected in the window."""
+    if len(E.get()) > 0:  # if entry is not an empty space
+        if len(L.curselection()) == 0:  # check the setting for aux-files
             pdflatex(E.get(), False)
         elif L.curselection()[0] == 0:
             pdflatex(E.get(), True)
@@ -17,7 +16,8 @@ def compilateur():
             pdflatex(E.get(), False)
 
 
-def auto_compilateur():
+def auto_compiler():
+    """Auto calls up the compilation function for the parameters selected in the window."""
     while True:
         f = open("auto.txt", "r")
         text = f.read()
@@ -40,6 +40,7 @@ def auto_compilateur():
 
 
 def thread_up():
+    """enable or disable the auto compile thread"""
     f = open("auto.txt", "r")
     if len(f.read()) > 2:
         print("on")
@@ -47,7 +48,7 @@ def thread_up():
         f = open("auto.txt", "w")
         f.write("on")
         f.close()
-        thread = threading.Thread(target=auto_compilateur)
+        thread = threading.Thread(target=auto_compiler)
         thread.start()
     else:
         print("off")
@@ -58,15 +59,15 @@ def thread_up():
 
 
 window = tkinter.Tk()
-window.title("PdfLaTeX compilator")
+window.title("pdfLaTeX compiler")
 window.minsize(500, 200)
 S = tkinter.Scrollbar(window, orient=tkinter.HORIZONTAL)
-E = tkinter.Entry(window, name="path", xscrollcommand=S)
-B = tkinter.Button(window, text="Compile", command=compilateur, default="disabled")
+E = tkinter.Entry(window, name="path")
+B = tkinter.Button(window, text="Compile", command=compiler, default="disabled")
 current_var = tkinter.StringVar()
 L = tkinter.Listbox(window, height=2, width=25)
-L.insert(1, "del auxfiles.")
-L.insert(2, "keep auxfiles.")
+L.insert(1, "del aux-files.")
+L.insert(2, "keep aux-files.")
 L.pack()
 BA = tkinter.Button(window, text="Auto compile", command=thread_up, default="disabled")
 E.pack()
