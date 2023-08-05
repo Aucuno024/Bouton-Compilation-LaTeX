@@ -1,16 +1,19 @@
 import os
 
 
-def pdflatex(file: str):
+def pdflatex(file: str, delaux: bool):
     """
-
-    :param file: le chemin vers le fichier
-    :return bool: le booléen correspondant à la réussite de la compilation du fichier
+    :param file: the path to the file
+    :param delaux: whether to delete auxiliary files
+    :return bool: the Boolean corresponding to the successful compilation of the file
     """
     try:
+        f = open(file)
+        f.close()
         os.system("pdflatex -aux-directory=auxfile " + file)
-        os.system("echo O | del auxfile")
+        if delaux:
+            os.system("echo O | del auxfile")
         return True
-    except BaseException:
-        print("f")
+    except FileNotFoundError:
+        print("not a file")
         return False
