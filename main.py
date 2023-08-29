@@ -3,6 +3,13 @@ import tkinter
 import threading
 from os import stat
 from time import localtime, asctime
+from view import view
+
+
+def viewer():
+    file = E.get()
+    thread = threading.Thread(target=view, args=[file])
+    thread.start()
 
 
 def compiler():
@@ -60,11 +67,12 @@ def thread_up():
 
 window = tkinter.Tk()
 window.title("pdfLaTeX compiler")
-window.minsize(500, 200)
+window.minsize(450, 250)
 S = tkinter.Scrollbar(window, orient=tkinter.HORIZONTAL)
 E = tkinter.Entry(window, name="path")
 B = tkinter.Button(window, text="Compile", command=compiler, default="disabled")
 current_var = tkinter.StringVar()
+BF = tkinter.Button(window, text="View", command=viewer, default="disabled")
 L = tkinter.Listbox(window, height=2, width=25)
 L.insert(1, "del aux-files.")
 L.insert(2, "keep aux-files.")
@@ -74,5 +82,6 @@ E.pack()
 S.pack(fill=tkinter.X, padx=170)
 B.pack()
 BA.pack()
+BF.pack()
 S.config(command=E.xview)
 window.mainloop()
